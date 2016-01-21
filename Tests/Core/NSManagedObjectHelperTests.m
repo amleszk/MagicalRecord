@@ -152,6 +152,28 @@
     }];
 }
 
+- (void)testDeleteEntityInstanceInOtherContextWhenAlreadyDeletedDoesNotCrash
+{
+    NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
+    
+    [defaultContext performBlockAndWait:^{
+        NSManagedObject *testEntity = [SingleRelatedEntity MR_createEntityInContext:defaultContext];
+        
+        [defaultContext MR_saveToPersistentStoreAndWait];
+        
+        XCTAssertFalse([testEntity isDeleted], @"Entity should not be deleted at this point");
+        
+        [testEntity MR_deleteEntity];
+        [defaultContext MR_saveToPersistentStoreAndWait];
+       
+        
+        [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+            // Delete the object in the other context should not crash
+            [testEntity MR_deleteEntityInContext:localContext];
+        }];
+    }];
+}
+
 #pragma mark - Private Methods
 
 - (void)p_createSampleData:(NSInteger)numberOfTestEntitiesToCreate inContext:(NSManagedObjectContext *)context
