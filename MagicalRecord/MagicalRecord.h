@@ -23,6 +23,7 @@ FOUNDATION_EXPORT const unsigned char MagicalRecordVersionString[];
 #import <MagicalRecord/MagicalRecord+Options.h>
 #import <MagicalRecord/MagicalRecord+Setup.h>
 #import <MagicalRecord/MagicalRecord+iCloud.h>
+#import <MagicalRecord/MagicalRecord+ShorthandMethods.h>
 
 #import <MagicalRecord/NSManagedObject+MagicalRecord.h>
 #import <MagicalRecord/NSManagedObject+MagicalRequests.h>
@@ -45,3 +46,4 @@ FOUNDATION_EXPORT const unsigned char MagicalRecordVersionString[];
 #import <MagicalRecord/NSAttributeDescription+MagicalDataImport.h>
 #import <MagicalRecord/NSRelationshipDescription+MagicalDataImport.h>
 #import <MagicalRecord/NSEntityDescription+MagicalDataImport.h>
+
